@@ -38,7 +38,7 @@ class _ChatPageState extends State<ChatPage> {
     ChatUsers(
         name: "Jacob Pena",
         messageText: "will update you in evening",
-        imageURL: "<https://randomuser.me/api/portraits/men/6.jpg>",
+        imageURL: "https://randomuser.me/api/portraits/men/6.jpg",
         time: "17 Mar"),
     ChatUsers(
         name: "Andrey Jones",
