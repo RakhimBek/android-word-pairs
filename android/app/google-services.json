@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "43486539956",
+    "firebase_url": "https://qaramba-365a8.firebaseio.com",
+    "project_id": "qaramba-365a8",
+    "storage_bucket": "qaramba-365a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43486539956:android:8b781c73cac813edd727e1",
+        "android_client_info": {
+          "package_name": "com.example.yam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43486539956-8bve0v36sdfq5i50lnbas0ak4sqk8tbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLwFTNhMkuR5VrI4ykBuXdlZUtABZaPv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43486539956-8bve0v36sdfq5i50lnbas0ak4sqk8tbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
