@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yam/screens/chat_page.dart';
+import 'package:yam/widgets/chat_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
