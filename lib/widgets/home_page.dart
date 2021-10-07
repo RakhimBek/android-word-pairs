@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yam/widgets/chat_page.dart';
+import 'package:yam/widgets/rtc_conversation.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChatPage(),
+      body: RtcConversation(),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.red,
         unselectedItemColor: Colors.grey.shade600,
