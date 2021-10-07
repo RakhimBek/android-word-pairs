@@ -19,7 +19,13 @@ class RtcConversationState extends State<RtcConversation> {
           'stun:stun1.l.google.com:19302',
           'stun:stun2.l.google.com:19302'
         ]
-      }
+      },
+      {'url': 'stun:stun2.1.google.com:19302'},
+      {
+        'urls': "turn:0.peerjs.com:3478",
+        'username': "peerjs",
+        'credential': "peerjsp"
+      },
     ]
   };
 
