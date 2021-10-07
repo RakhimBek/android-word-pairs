@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:yam/widgets/conversation_list.dart';
+import 'package:http/http.dart' as http;
 
 import 'models/chat_users_model.dart';
 
@@ -56,6 +59,29 @@ class _ChatPageState extends State<ChatPage> {
         imageURL: "https://randomuser.me/api/portraits/men/9.jpg",
         time: "18 Feb"),
   ];
+
+  void fetchUserList() async {
+    final response = await http
+        .get(Uri.parse('http://192.168.43.144:8080/api/user/list'));
+
+    if (response.statusCode == 200) {
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      //return Album.fromJson(jsonDecode(response.body));
+
+      var json = jsonDecode(response.body);
+      print(json);
+
+      var userList = json['userInfos'] as List;
+      userList.forEach((element) {
+      });
+
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      //throw Exception('Failed to load album');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
