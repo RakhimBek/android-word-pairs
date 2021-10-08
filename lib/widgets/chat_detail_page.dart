@@ -10,11 +10,11 @@ class ChatDetailPage extends StatefulWidget {
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
   List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Hello, Will", messageType: "receiver"),
-    ChatMessage(messageContent: "How have you been?", messageType: "receiver"),
-    ChatMessage(messageContent: "Hey fine dude. wbu?", messageType: "sender"),
-    ChatMessage(messageContent: "ehhhh, doing OK.", messageType: "receiver"),
-    ChatMessage(messageContent: "Is there any thing ?", messageType: "sender"),
+    ChatMessage(messageContent: "Даров!", messageType: "receiver"),
+    ChatMessage(messageContent: "Как ты? Чатик сделал?", messageType: "receiver"),
+    ChatMessage(messageContent: "...", messageType: "sender"),
+    ChatMessage(messageContent: "ау ", messageType: "receiver"),
+    ChatMessage(messageContent: "Ага", messageType: "sender"),
   ];
 
   @override
@@ -43,7 +43,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                 ),
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      "https://randomuser.me/api/portraits/men/5.jpg"),
+                      "https://sun4-11.userapi.com/s/v1/if1/zuF1UsBOMZ5ApE1VB9EJFjWbZq7RXChRw_tXomSRB9DiH2tPYyZeqDUhhBmkHC-tO-UpaH2m.jpg?size=100x100&quality=96&crop=0,8,1010,1010&ava=1"),
                   maxRadius: 20,
                 ),
                 SizedBox(
@@ -55,7 +55,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Kriss Benwat",
+                        "Илья Годяев",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),

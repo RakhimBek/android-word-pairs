@@ -39,65 +39,25 @@ class _ChatPageState extends State<ChatPage> {
   void initState() {
     chatUsers.addAll([
       ChatUsers(
-          name: "Jane Russel",
-          messageText: "Awesome Setup",
-          imageURL: "https://randomuser.me/api/portraits/women/1.jpg",
+          name: "Guillermo del Toro Gómez",
+          messageText: "Are u guys kidding??",
+          imageURL: "https://randomuser.me/api/portraits/men/73.jpg",
           time: "Now"),
       ChatUsers(
-          name: "Glady's Murphy",
-          messageText: "That's Great",
-          imageURL: "https://randomuser.me/api/portraits/women/2.jpg",
+          name: "Илья Годяев",
+          messageText: "Ага",
+          imageURL: "https://sun4-11.userapi.com/s/v1/if1/zuF1UsBOMZ5ApE1VB9EJFjWbZq7RXChRw_tXomSRB9DiH2tPYyZeqDUhhBmkHC-tO-UpaH2m.jpg?size=100x100&quality=96&crop=0,8,1010,1010&ava=1",
           time: "Yesterday"),
       ChatUsers(
-          name: "Jorge Henry",
-          messageText: "Hey where are you?",
-          imageURL: "https://randomuser.me/api/portraits/men/3.jpg",
-          time: "31 Mar"),
+          name: "Илья Симоненко",
+          messageText: "Не",
+          imageURL: "https://sun4-15.userapi.com/s/v1/if1/zZVazCrWYbV7PizVFpAYPTTXIbgqdDp9-7FE43BR6giGZeeGX4CHA_ioA71Bx8MN9Nab8ln5.jpg?size=100x100&quality=96&crop=285,184,1182,1182&ava=1",
+          time: "Yesterday"),
       ChatUsers(
-          name: "Philip Fox",
-          messageText: "Busy! Call me in 20 mins",
-          imageURL: "https://randomuser.me/api/portraits/men/4.jpg",
-          time: "28 Mar"),
-      ChatUsers(
-          name: "Debra Hawkins",
-          messageText: "Thankyou, It's awesome",
-          imageURL: "https://randomuser.me/api/portraits/women/5.jpg",
-          time: "23 Mar"),
-      ChatUsers(
-          name: "Jacob Pena",
-          messageText: "will update you in evening",
-          imageURL: "https://randomuser.me/api/portraits/men/6.jpg",
-          time: "17 Mar"),
-      ChatUsers(
-          name: "Andrey Jones",
-          messageText: "Can you please share the file?",
-          imageURL: "https://randomuser.me/api/portraits/men/7.jpg",
-          time: "24 Feb"),
-      ChatUsers(
-          name: "John Wick",
-          messageText: "How are you?",
-          imageURL: "https://randomuser.me/api/portraits/men/8.jpg",
-          time: "18 Feb"),
-      ChatUsers(
-          name: "R R",
-          messageText: "How are you?",
-          imageURL: "https://randomuser.me/api/portraits/men/9.jpg",
-          time: "18 Feb"),
-      ChatUsers(
-          name: "R R",
-          messageText: "How are you?",
-          imageURL: "https://randomuser.me/api/portraits/men/9.jpg",
-          time: "18 Feb"),
-      ChatUsers(
-          name: "Qee R",
-          messageText: "How are you?",
-          imageURL: "https://randomuser.me/api/portraits/men/9.jpg",
-          time: "18 Feb"),
-      ChatUsers(
-          name: "Seee R",
-          messageText: "How are you?",
-          imageURL: "https://randomuser.me/api/portraits/men/9.jpg",
-          time: "18 Feb"),
+          name: "Раимбек Рахимбеков",
+          messageText: "..",
+          imageURL: "https://sun4-15.userapi.com/s/v1/ig2/gRyj33y7Ypu9s4qtQDOidCML_oAm1EPS7JN0XAHP0HO0Prtd1jtE-exlAT4dIB0ITWmSxcuMHxI_XRYrcLJYL3Ld.jpg?size=200x200&quality=96&crop=233,1,749,749&ava=1",
+          time: "Yesterday"),
     ]);
     super.initState();
   }
