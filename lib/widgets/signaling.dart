@@ -48,7 +48,7 @@ class Signaling {
     roomCollectionSnapshot.docs.forEach((document) => document.reference.delete());
 
     // create a new one
-    db.collection('rooms').doc('THE_ROOM').set({});
+    roomCollection.doc('THE_ROOM').set({});
     DocumentReference roomRef = db.collection('rooms').doc('THE_ROOM');
 
     print('Create PeerConnection with configuration: $configuration');

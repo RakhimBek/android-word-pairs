@@ -43,6 +43,13 @@ class RtcConversationState extends State<RtcConversation> {
       setState(() {});
     });
 
+    signaling.openUserMedia(_localRenderer, _remoteRenderer);
+    (() async {
+      signaling.createRoom(_remoteRenderer);
+
+      setState(() {});
+    })(); // call anonymous asynchronously
+
     super.initState();
   }
 
@@ -61,48 +68,67 @@ class RtcConversationState extends State<RtcConversation> {
           children: [
             SizedBox(height: 35),
             Row(children: [
-              ElevatedButton(
-                onPressed: () {
-                  signaling.openUserMedia(_localRenderer, _remoteRenderer);
-                  setState(() {});
-                },
-                child: Icon(
-                  Icons.camera,
-                  color: Colors.grey.shade600,
-                  size: 20,
-                ),
-              ),
-              SizedBox(
-                width: 2,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  roomId = await signaling.createRoom(_remoteRenderer);
-                  textEditingController.text = roomId!;
-                  setState(() {});
-                },
-                child: Text("Create room"),
-              ),
-              SizedBox(
-                width: 2,
-              ),
+              //ElevatedButton(
+              //  onPressed: () {
+              //    signaling.openUserMedia(_localRenderer, _remoteRenderer);
+              //    setState(() {});
+              //  },
+              //  child: Icon(
+              //    Icons.camera,
+              //    color: Colors.grey.shade600,
+              //    size: 20,
+              //  ),
+              //),
+              //SizedBox(
+              //  width: 2,
+              //),
+              //ElevatedButton(
+              //  onPressed: () async {
+              //    roomId = await signaling.createRoom(_remoteRenderer);
+              //    textEditingController.text = roomId!;
+              //    setState(() {});
+              //  },
+              //  child: Text("Create room"),
+              //),
+              //SizedBox(
+              //  width: 2,
+              //),
               ElevatedButton(
                 onPressed: () {
                   // Add roomId
+                  //signaling.joinRoom(
+                  //  textEditingController.text,
+                  //  _remoteRenderer,
+                  //);
+
+                  signaling.openUserMedia(_localRenderer, _remoteRenderer);
+                  (() async {
+                    signaling.createRoom(_remoteRenderer);
+
+                    setState(() {});
+                  })();
+
                   signaling.joinRoom(
                     textEditingController.text,
                     _remoteRenderer,
                   );
+
+                  setState(() {});
                 },
-                child: Text("Join room"),
+                child: Icon(
+                  Icons.update,
+                  color: Colors.grey.shade600,
+                  size: 20,
+                ),
               ),
-              SizedBox(
-                width: 2,
-              ),
+              //SizedBox(
+              //  width: 2,
+              //),
               ElevatedButton(
                 onPressed: () {
                   signaling.hangUp(_localRenderer);
                   setState(() {});
+                  Navigator.pop(context);
                 },
                 child: Icon(
                   Icons.phone_disabled,
@@ -121,20 +147,20 @@ class RtcConversationState extends State<RtcConversation> {
               ],
             ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Join the following Room: "),
-              Flexible(
-                child: TextFormField(
-                  controller: textEditingController,
-                ),
-              )
-            ],
-          ),
-        )
+        //Padding(
+        //  padding: const EdgeInsets.all(8.0),
+        //  child: Row(
+        //    mainAxisAlignment: MainAxisAlignment.center,
+        //    children: [
+        //      Text("Join the following Room: "),
+        //      Flexible(
+        //        child: TextFormField(
+        //          controller: textEditingController,
+        //        ),
+        //      )
+        //    ],
+        //  ),
+        //)
       ],
     );
   }
