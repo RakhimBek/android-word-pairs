@@ -41,7 +41,15 @@ class Signaling {
 
   Future<String> createRoom(RTCVideoRenderer remoteRenderer) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    DocumentReference roomRef = db.collection('rooms').doc();
+
+    // delete all the rooms
+    var roomCollection = db.collection('rooms');
+    var roomCollectionSnapshot = await roomCollection.get();
+    roomCollectionSnapshot.docs.forEach((document) => document.reference.delete());
+
+    // create a new one
+    db.collection('rooms').doc('THE_ROOM').set({});
+    DocumentReference roomRef = db.collection('rooms').doc('THE_ROOM');
 
     print('Create PeerConnection with configuration: $configuration');
 
@@ -120,12 +128,23 @@ class Signaling {
     });
     // Listen for remote ICE candidates above
 
+
+    roomCollection.snapshots().listen((snapshot) {
+      snapshot.docChanges.forEach((change) {
+        if (change.type == DocumentChangeType.added) {
+          Map<String, dynamic> data = change.doc.data() as Map<String, dynamic>;
+
+          print('roooom!!!!!: ${jsonEncode(data)}');
+        }
+      });
+    });
+
     return roomId;
   }
 
   Future<void> joinRoom(String roomId, RTCVideoRenderer remoteVideo) async {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    DocumentReference roomRef = db.collection('rooms').doc('$roomId');
+    DocumentReference roomRef = db.collection('rooms').doc('THE_ROOM');
     var roomSnapshot = await roomRef.get();
     print('Got room ${roomSnapshot.exists}');
 
