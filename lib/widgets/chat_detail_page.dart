@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yam/widgets/rtc_conversation.dart';
 
 import 'models/chat_message_model.dart';
 
@@ -148,6 +149,19 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                   ),
                   SizedBox(
                     width: 15,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        print('camera press');
+                        return Scaffold(body: RtcConversation());
+                      }));
+                    },
+                    icon: Icon(
+                      Icons.photo_camera,
+                      color: Colors.black,
+                    ),
                   ),
                   FloatingActionButton(
                     onPressed: () {},
