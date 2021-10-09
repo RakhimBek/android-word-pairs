@@ -28,8 +28,29 @@
 
   <title>yam</title>
   <link rel="manifest" href="manifest.json">
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
 </head>
 <body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBje3JpZ5QJHG4_R4em26kAMrhd-ZxMSNU",
+      authDomain: "qaramba-365a8.firebaseapp.com",
+      databaseURL: "https://qaramba-365a8.firebaseio.com",
+      projectId: "qaramba-365a8",
+      storageBucket: "qaramba-365a8.appspot.com",
+      messagingSenderId: "43486539956",
+      appId: "1:43486539956:web:8670cfb36fec419cd727e1"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+  </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
