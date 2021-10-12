@@ -9,6 +9,8 @@ class Conversation extends StatefulWidget {
 }
 
 class _ConversationState extends State<Conversation> {
+  TextEditingController textEditingController = TextEditingController(text: '');
+
   List<ChatMessage> messages = [
     ChatMessage(messageContent: "Даров!", messageType: "receiver"),
     ChatMessage(messageContent: "Как ты? Чатик сделал?", messageType: "receiver"),
@@ -81,35 +83,38 @@ class _ConversationState extends State<Conversation> {
       ),
       body: Stack(
         children: <Widget>[
-          ListView.builder(
-            itemCount: messages.length,
-            shrinkWrap: true,
-            padding: EdgeInsets.only(top: 10, bottom: 10),
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Container(
-                padding:
-                    EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
-                child: Align(
-                  alignment: (messages[index].messageType == "receiver"
-                      ? Alignment.topLeft
-                      : Alignment.topRight),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: (messages[index].messageType == "receiver"
-                          ? Colors.grey.shade200
-                          : Colors.blue[200]),
-                    ),
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      messages[index].messageContent,
-                      style: TextStyle(fontSize: 15),
+          SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: ListView.builder(
+              itemCount: messages.length,
+              shrinkWrap: true,
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              physics: NeverScrollableScrollPhysics(),
+              itemBuilder: (context, index) {
+                return Container(
+                  padding:
+                      EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                  child: Align(
+                    alignment: (messages[index].messageType == "receiver"
+                        ? Alignment.topLeft
+                        : Alignment.topRight),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: (messages[index].messageType == "receiver"
+                            ? Colors.grey.shade200
+                            : Colors.blue[200]),
+                      ),
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        messages[index].messageContent,
+                        style: TextStyle(fontSize: 15),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
           Align(
             alignment: Alignment.bottomLeft,
@@ -141,6 +146,7 @@ class _ConversationState extends State<Conversation> {
                   ),
                   Expanded(
                     child: TextField(
+                      controller: textEditingController,
                       decoration: InputDecoration(
                           hintText: "Write message...",
                           hintStyle: TextStyle(color: Colors.black54),
@@ -164,7 +170,14 @@ class _ConversationState extends State<Conversation> {
                     ),
                   ),
                   FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      messages.add(ChatMessage(
+                          messageContent: textEditingController.text,
+                          messageType: 'sender'));
+
+                      textEditingController.text = '';
+                      setState(() {});
+                    },
                     child: Icon(
                       Icons.send,
                       color: Colors.white,
