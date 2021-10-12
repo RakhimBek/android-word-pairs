@@ -3,12 +3,12 @@ import 'package:yam/widgets/rtc_conversation.dart';
 
 import 'models/chat_message_model.dart';
 
-class ChatDetailPage extends StatefulWidget {
+class Conversation extends StatefulWidget {
   @override
-  _ChatDetailPageState createState() => _ChatDetailPageState();
+  _ConversationState createState() => _ConversationState();
 }
 
-class _ChatDetailPageState extends State<ChatDetailPage> {
+class _ConversationState extends State<Conversation> {
   List<ChatMessage> messages = [
     ChatMessage(messageContent: "Даров!", messageType: "receiver"),
     ChatMessage(messageContent: "Как ты? Чатик сделал?", messageType: "receiver"),
