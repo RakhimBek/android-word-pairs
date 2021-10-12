@@ -11,13 +11,7 @@ class Conversation extends StatefulWidget {
 class _ConversationState extends State<Conversation> {
   TextEditingController textEditingController = TextEditingController(text: '');
 
-  List<ChatMessage> messages = [
-    ChatMessage(messageContent: "Даров!", messageType: "receiver"),
-    ChatMessage(messageContent: "Как ты? Чатик сделал?", messageType: "receiver"),
-    ChatMessage(messageContent: "...", messageType: "sender"),
-    ChatMessage(messageContent: "ау ", messageType: "receiver"),
-    ChatMessage(messageContent: "Ага", messageType: "sender"),
-  ];
+  List<ChatMessage> messages = [];
 
   @override
   Widget build(BuildContext context) {
