@@ -39,11 +39,6 @@ class _ChatPageState extends State<ChatPage> {
   void initState() {
     chatUsers.addAll([
       ChatUsers(
-          name: "Guillermo del Toro Gómez",
-          messageText: "Are u guys kidding??",
-          imageURL: "https://randomuser.me/api/portraits/men/73.jpg",
-          time: "Now"),
-      ChatUsers(
           name: "Илья Годяев",
           messageText: "Ага",
           imageURL: "https://sun4-11.userapi.com/s/v1/if1/zuF1UsBOMZ5ApE1VB9EJFjWbZq7RXChRw_tXomSRB9DiH2tPYyZeqDUhhBmkHC-tO-UpaH2m.jpg?size=100x100&quality=96&crop=0,8,1010,1010&ava=1",
