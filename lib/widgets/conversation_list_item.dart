@@ -9,12 +9,13 @@ class ConversationListItem extends StatefulWidget {
   String time;
   bool isMessageRead;
 
-  ConversationListItem(
-      {required this.name,
-      required this.messageText,
-      required this.imageUrl,
-      required this.time,
-      required this.isMessageRead});
+  ConversationListItem({
+    required this.name,
+    required this.messageText,
+    required this.imageUrl,
+    required this.time,
+    required this.isMessageRead,
+  });
 
   @override
   _ConversationListItemState createState() => _ConversationListItemState();
@@ -59,11 +60,12 @@ class _ConversationListItemState extends State<ConversationListItem> {
                           Text(
                             widget.messageText,
                             style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.grey.shade600,
-                                fontWeight: widget.isMessageRead
-                                    ? FontWeight.bold
-                                    : FontWeight.normal),
+                              fontSize: 13,
+                              color: Colors.grey.shade600,
+                              fontWeight: widget.isMessageRead
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
                           ),
                         ],
                       ),
@@ -75,10 +77,10 @@ class _ConversationListItemState extends State<ConversationListItem> {
             Text(
               widget.time,
               style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: widget.isMessageRead
-                      ? FontWeight.bold
-                      : FontWeight.normal),
+                fontSize: 12,
+                fontWeight:
+                    widget.isMessageRead ? FontWeight.bold : FontWeight.normal,
+              ),
             ),
           ],
         ),
