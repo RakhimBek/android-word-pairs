@@ -5,18 +5,25 @@ import 'package:yam/widgets/rtc_conversation.dart';
 import 'models/chat_message_model.dart';
 
 class Conversation extends StatefulWidget {
+  String id;
+
+  Conversation({required this.id});
+
   @override
-  _ConversationState createState() => _ConversationState();
+  _ConversationState createState() => _ConversationState(id);
 }
 
 class _ConversationState extends State<Conversation> {
   TextEditingController textEditingController = TextEditingController(text: '');
-
   List<ChatMessage> messages = [];
+
+  String id;
+
+  _ConversationState(this.id);
 
   @override
   void initState() {
-    print('INIT STATE');
+    print('INIT STATE: ${id}');
     final FirebaseFirestore db = FirebaseFirestore.instance;
     final chatCollection = db.collection('chat-collection');
 
@@ -36,6 +43,8 @@ class _ConversationState extends State<Conversation> {
         }
       });
     });
+
+    super.initState();
   }
 
   @override

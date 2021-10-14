@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'conversation.dart';
 
 class ConversationListItem extends StatefulWidget {
+  String id;
   String name;
   String messageText;
   String imageUrl;
@@ -10,6 +11,7 @@ class ConversationListItem extends StatefulWidget {
   bool isMessageRead;
 
   ConversationListItem({
+    required this.id,
     required this.name,
     required this.messageText,
     required this.imageUrl,
@@ -18,16 +20,23 @@ class ConversationListItem extends StatefulWidget {
   });
 
   @override
-  _ConversationListItemState createState() => _ConversationListItemState();
+  _ConversationListItemState createState() =>
+      _ConversationListItemState(id: id);
 }
 
 class _ConversationListItemState extends State<ConversationListItem> {
+  String id;
+
+  _ConversationListItemState({
+    required this.id,
+  });
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return Conversation();
+          return Conversation(id: this.id);
         }));
       },
       child: Container(

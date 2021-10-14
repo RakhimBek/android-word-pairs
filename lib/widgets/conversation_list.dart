@@ -34,25 +34,34 @@ class _ConversationListState extends State<ConversationList> {
       //throw Exception('Failed to load album');
     }
   }
-  
+
   @override
   void initState() {
     chatUsers.addAll([
       ChatUsers(
-          name: "Илья Годяев",
-          messageText: "Ага",
-          imageURL: "https://sun4-11.userapi.com/s/v1/if1/zuF1UsBOMZ5ApE1VB9EJFjWbZq7RXChRw_tXomSRB9DiH2tPYyZeqDUhhBmkHC-tO-UpaH2m.jpg?size=100x100&quality=96&crop=0,8,1010,1010&ava=1",
-          time: "Yesterday"),
+        id: 'id001',
+        name: "Илья Годяев",
+        messageText: "Ага",
+        imageURL:
+            "https://sun4-11.userapi.com/s/v1/if1/zuF1UsBOMZ5ApE1VB9EJFjWbZq7RXChRw_tXomSRB9DiH2tPYyZeqDUhhBmkHC-tO-UpaH2m.jpg?size=100x100&quality=96&crop=0,8,1010,1010&ava=1",
+        time: "Yesterday",
+      ),
       ChatUsers(
-          name: "Илья Симоненко",
-          messageText: "Не",
-          imageURL: "https://sun4-15.userapi.com/s/v1/if1/zZVazCrWYbV7PizVFpAYPTTXIbgqdDp9-7FE43BR6giGZeeGX4CHA_ioA71Bx8MN9Nab8ln5.jpg?size=100x100&quality=96&crop=285,184,1182,1182&ava=1",
-          time: "Yesterday"),
+        id: 'id002',
+        name: "Илья Симоненко",
+        messageText: "Не",
+        imageURL:
+            "https://sun4-15.userapi.com/s/v1/if1/zZVazCrWYbV7PizVFpAYPTTXIbgqdDp9-7FE43BR6giGZeeGX4CHA_ioA71Bx8MN9Nab8ln5.jpg?size=100x100&quality=96&crop=285,184,1182,1182&ava=1",
+        time: "Yesterday",
+      ),
       ChatUsers(
-          name: "Раимбек Рахимбеков",
-          messageText: "..",
-          imageURL: "https://sun4-15.userapi.com/s/v1/ig2/gRyj33y7Ypu9s4qtQDOidCML_oAm1EPS7JN0XAHP0HO0Prtd1jtE-exlAT4dIB0ITWmSxcuMHxI_XRYrcLJYL3Ld.jpg?size=200x200&quality=96&crop=233,1,749,749&ava=1",
-          time: "Yesterday"),
+        id: 'id003',
+        name: "Раимбек Рахимбеков",
+        messageText: "..",
+        imageURL:
+            "https://sun4-15.userapi.com/s/v1/ig2/gRyj33y7Ypu9s4qtQDOidCML_oAm1EPS7JN0XAHP0HO0Prtd1jtE-exlAT4dIB0ITWmSxcuMHxI_XRYrcLJYL3Ld.jpg?size=200x200&quality=96&crop=233,1,749,749&ava=1",
+        time: "Yesterday",
+      ),
     ]);
     super.initState();
   }
@@ -75,6 +84,7 @@ class _ConversationListState extends State<ConversationList> {
               physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
                 return ConversationListItem(
+                  id: chatUsers[index].id,
                   name: chatUsers[index].name,
                   messageText: chatUsers[index].messageText,
                   imageUrl: chatUsers[index].imageURL,
