@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yam/widgets/rtc_conversation.dart';
 
@@ -12,6 +13,30 @@ class _ConversationState extends State<Conversation> {
   TextEditingController textEditingController = TextEditingController(text: '');
 
   List<ChatMessage> messages = [];
+
+  @override
+  void initState() {
+    print('INIT STATE');
+    final FirebaseFirestore db = FirebaseFirestore.instance;
+    final chatCollection = db.collection('chat-collection');
+
+    chatCollection.snapshots().listen((event) {
+      event.docChanges.forEach((change) {
+        var data = change.doc.data()!;
+        if (change.type == DocumentChangeType.modified) {
+
+          setState(() {
+            var message = data;
+
+            messages.add(ChatMessage(
+              messageContent: message['content'],
+              messageType: message['type'],
+            ));
+          });
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,12 +190,14 @@ class _ConversationState extends State<Conversation> {
                   ),
                   FloatingActionButton(
                     onPressed: () {
-                      messages.add(ChatMessage(
-                          messageContent: textEditingController.text,
-                          messageType: 'sender'));
-
-                      textEditingController.text = '';
-                      setState(() {});
+                      final FirebaseFirestore db = FirebaseFirestore.instance;
+                      final chatCollection = db.collection('chat-collection');
+                      final doc = chatCollection.doc('chat');
+                      doc.set({
+                        'type': 'sender',
+                        'content': textEditingController.text,
+                      });
+                      textEditingController.clear();
                     },
                     child: Icon(
                       Icons.send,
