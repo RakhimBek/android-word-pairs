@@ -31,7 +31,6 @@ class _ConversationState extends State<Conversation> {
       event.docChanges.forEach((change) {
         var data = change.doc.data()!;
         if (change.type == DocumentChangeType.modified) {
-
           setState(() {
             var message = data;
 
@@ -87,7 +86,9 @@ class _ConversationState extends State<Conversation> {
                       Text(
                         "Илья Годяев",
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       SizedBox(
                         height: 6,
@@ -95,7 +96,9 @@ class _ConversationState extends State<Conversation> {
                       Text(
                         "Online",
                         style: TextStyle(
-                            color: Colors.grey.shade600, fontSize: 13),
+                          color: Colors.grey.shade600,
+                          fontSize: 13,
+                        ),
                       ),
                     ],
                   ),
@@ -118,8 +121,12 @@ class _ConversationState extends State<Conversation> {
             physics: BouncingScrollPhysics(),
             itemBuilder: (context, index) {
               return Container(
-                padding:
-                    EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
+                padding: EdgeInsets.only(
+                  left: 14,
+                  right: 14,
+                  top: 10,
+                  bottom: 10,
+                ),
                 child: Align(
                   alignment: (messages[index].messageType == "receiver"
                       ? Alignment.topLeft
@@ -173,9 +180,10 @@ class _ConversationState extends State<Conversation> {
                     child: TextField(
                       controller: textEditingController,
                       decoration: InputDecoration(
-                          hintText: "Write message...",
-                          hintStyle: TextStyle(color: Colors.black54),
-                          border: InputBorder.none),
+                        hintText: "Write message...",
+                        hintStyle: TextStyle(color: Colors.black54),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -183,11 +191,13 @@ class _ConversationState extends State<Conversation> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        print('camera press');
-                        return Scaffold(body: RtcConversation());
-                      }));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          print('camera press');
+                          return Scaffold(body: RtcConversation());
+                        }),
+                      );
                     },
                     icon: Icon(
                       Icons.photo_camera,
