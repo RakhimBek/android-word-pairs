@@ -31,6 +31,22 @@ class _ConversationListItemState extends State<ConversationListItem> {
     required this.id,
   });
 
+  CircleAvatar getCircleAvatar() {
+    print(widget.imageUrl);
+    if (widget.imageUrl != null) {
+      return CircleAvatar(
+        backgroundImage: NetworkImage(widget.imageUrl),
+        maxRadius: 30,
+      );
+    }
+
+    return CircleAvatar(
+      child: Text(widget.name[0]),
+      maxRadius: 30,
+    );
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -46,10 +62,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
             Expanded(
               child: Row(
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(widget.imageUrl),
-                    maxRadius: 30,
-                  ),
+                  getCircleAvatar(),
                   const SizedBox(
                     width: 16,
                   ),
