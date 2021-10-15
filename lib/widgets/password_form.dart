@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/register_form.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({Key? key}) : super(key: key);
+class PasswordForm extends StatelessWidget {
+  const PasswordForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +28,6 @@ class LoginForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: CupertinoColors.systemGrey6,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextField(
-                    controller: loginController,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      hintText: "Username",
-                      hintStyle: TextStyle(color: Colors.black54),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 3,
-                ),
                 Container(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   margin: const EdgeInsets.only(left: 20, right: 20),
@@ -105,14 +85,9 @@ class LoginForm extends StatelessWidget {
                         'password': passwordController.text,
                       });
                     },
-                    child: const Text(
-                      "LOG IN",
-                      style: TextStyle(
-                        color: CupertinoColors.white,
-                        //backgroundColor: CupertinoColors.inactiveGray,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.arrow_forward_outlined,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
