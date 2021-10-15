@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yam/widgets/conversation_list_item.dart';
 import 'package:http/http.dart' as http;
@@ -75,8 +76,23 @@ class _ConversationListState extends State<ConversationList> {
     return Scaffold(
       key: scaffoldKey,
       body: RefreshIndicator(
-        onRefresh: () {
+        onRefresh: () async {
           print('onRefresh');
+
+          var querySnapshot =
+              await FirebaseFirestore.instance.collection('users').get();
+
+          querySnapshot.docs.forEach((element) {
+            var data = element.data();
+            chatUsers.clear();
+            chatUsers.add(ChatUsers(
+              id: data['login'],
+              name: data['login'],
+              messageText: "Не",
+              imageURL: null,
+              time: "Yesterday",
+            ));
+          });
 
           return Future.delayed(const Duration(milliseconds: 500), () {
             print('The function that changees state');

@@ -4,7 +4,7 @@ class ChatUsers {
   String id;
   String name;
   String messageText;
-  String imageURL;
+  String? imageURL;
   String time;
 
   ChatUsers({

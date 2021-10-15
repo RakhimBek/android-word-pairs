@@ -6,7 +6,7 @@ class ConversationListItem extends StatefulWidget {
   String id;
   String name;
   String messageText;
-  String imageUrl;
+  String? imageUrl;
   String time;
   bool isMessageRead;
 
@@ -35,7 +35,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
     print(widget.imageUrl);
     if (widget.imageUrl != null) {
       return CircleAvatar(
-        backgroundImage: NetworkImage(widget.imageUrl),
+        backgroundImage: NetworkImage(widget.imageUrl!),
         maxRadius: 30,
       );
     }

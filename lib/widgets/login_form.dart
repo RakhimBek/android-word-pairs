@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,8 +9,10 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController loginController = TextEditingController(text: '');
-    final TextEditingController passwordController = TextEditingController(text: '');
+    final TextEditingController loginController =
+        TextEditingController(text: '');
+    final TextEditingController passwordController =
+        TextEditingController(text: '');
     return MaterialApp(
       color: CupertinoColors.activeGreen,
       title: 'Flutter Demo',
@@ -87,9 +90,20 @@ class LoginForm extends StatelessWidget {
                         ),
                       );
 
-                      var sharedPreferences = await SharedPreferences.getInstance();
-                      sharedPreferences.setString('login', loginController.text);
-                      sharedPreferences.setString('password', passwordController.text);
+                      var sharedPreferences =
+                          await SharedPreferences.getInstance();
+                      sharedPreferences.setString(
+                          'login', loginController.text);
+                      sharedPreferences.setString(
+                          'password', passwordController.text);
+
+                      var doc =
+                          FirebaseFirestore.instance.collection('users').doc();
+
+                      doc.set({
+                        'login': loginController.text,
+                        'password': passwordController.text,
+                      });
                     },
                     child: const Text(
                       "LOG IN",
