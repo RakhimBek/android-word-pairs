@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:yam/widgets/home_page.dart';
 
 class LoginForm extends StatelessWidget {
+  const LoginForm({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
