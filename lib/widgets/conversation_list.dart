@@ -71,30 +71,51 @@ class _ConversationListState extends State<ConversationList> {
     var physics = const BouncingScrollPhysics()
         .applyTo(const AlwaysScrollableScrollPhysics());
 
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(
-            height: 30,
-          ),
-          ListView.builder(
-            itemCount: chatUsers.length,
-            shrinkWrap: true,
-            padding: const EdgeInsets.only(top: 16),
-            physics: physics,
-            itemBuilder: (context, index) {
-              return ConversationListItem(
-                id: chatUsers[index].id,
-                name: chatUsers[index].name,
-                messageText: chatUsers[index].messageText,
-                imageUrl: chatUsers[index].imageURL,
-                time: chatUsers[index].time,
-                isMessageRead: (index == 0 || index == 3) ? true : false,
-              );
-            },
-          ),
-        ],
+      key: scaffoldKey,
+      body: RefreshIndicator(
+        onRefresh: () {
+          print('onRefresh');
+
+          return Future.delayed(const Duration(milliseconds: 500), () {
+            print('The function that changees state');
+
+            setState(() {});
+
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: const Text(
+                'updated',
+                textAlign: TextAlign.center,
+              ),
+              duration: const Duration(seconds: 1),
+            ));
+          });
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(
+              height: 30,
+            ),
+            ListView.builder(
+              itemCount: chatUsers.length,
+              shrinkWrap: true,
+              padding: const EdgeInsets.only(top: 16),
+              physics: physics,
+              itemBuilder: (context, index) {
+                return ConversationListItem(
+                  id: chatUsers[index].id,
+                  name: chatUsers[index].name,
+                  messageText: chatUsers[index].messageText,
+                  imageUrl: chatUsers[index].imageURL,
+                  time: chatUsers[index].time,
+                  isMessageRead: (index == 0 || index == 3) ? true : false,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
