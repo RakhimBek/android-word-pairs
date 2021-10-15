@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/rtc_conversation.dart';
 
 import 'models/chat_message_model.dart';
@@ -48,6 +49,13 @@ class _ConversationState extends State<Conversation> {
 
   @override
   Widget build(BuildContext context) {
+
+    var sharedPreferences = SharedPreferences.getInstance();
+    sharedPreferences.then((value) {
+        print('value is: ' + value.getString('login')!);
+        print('value is: ' + value.getString('password')!);
+    });
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

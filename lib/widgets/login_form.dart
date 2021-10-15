@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/home_page.dart';
 
 class LoginForm extends StatelessWidget {
@@ -7,6 +8,8 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController loginController = TextEditingController(text: '');
+    final TextEditingController passwordController = TextEditingController(text: '');
     return MaterialApp(
       color: CupertinoColors.activeGreen,
       title: 'Flutter Demo',
@@ -29,16 +32,17 @@ class LoginForm extends StatelessWidget {
                     color: CupertinoColors.systemGrey6,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  child: const TextField(
+                  child: TextField(
+                    controller: loginController,
                     textAlign: TextAlign.left,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Login...",
                       hintStyle: TextStyle(color: Colors.black54),
                       border: InputBorder.none,
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 3,
                 ),
                 Container(
@@ -48,12 +52,13 @@ class LoginForm extends StatelessWidget {
                     color: CupertinoColors.systemGrey6,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  child: const TextField(
+                  child: TextField(
+                    controller: passwordController,
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
                     textAlign: TextAlign.left,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Password...",
                       hintStyle: TextStyle(color: Colors.black54),
                       border: InputBorder.none,
@@ -72,7 +77,7 @@ class LoginForm extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -81,6 +86,10 @@ class LoginForm extends StatelessWidget {
                           },
                         ),
                       );
+
+                      var sharedPreferences = await SharedPreferences.getInstance();
+                      sharedPreferences.setString('login', loginController.text);
+                      sharedPreferences.setString('password', passwordController.text);
                     },
                     child: const Text(
                       "LOG IN",
