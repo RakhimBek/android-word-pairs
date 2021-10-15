@@ -66,7 +66,7 @@ class RtcConversationState extends State<RtcConversation> {
       children: [
         Column(
           children: [
-            SizedBox(height: 35),
+            const SizedBox(height: 35),
             Row(children: [
               //ElevatedButton(
               //  onPressed: () {

@@ -50,7 +50,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
                     backgroundImage: NetworkImage(widget.imageUrl),
                     maxRadius: 30,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 16,
                   ),
                   Expanded(
@@ -63,7 +63,7 @@ class _ConversationListItemState extends State<ConversationListItem> {
                             widget.name,
                             style: TextStyle(fontSize: 16),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 6,
                           ),
                           Text(
