@@ -68,33 +68,33 @@ class _ConversationListState extends State<ConversationList> {
 
   @override
   Widget build(BuildContext context) {
+    var physics = const BouncingScrollPhysics()
+        .applyTo(const AlwaysScrollableScrollPhysics());
+
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(
-              height: 30,
-            ),
-            ListView.builder(
-              itemCount: chatUsers.length,
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(top: 16),
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return ConversationListItem(
-                  id: chatUsers[index].id,
-                  name: chatUsers[index].name,
-                  messageText: chatUsers[index].messageText,
-                  imageUrl: chatUsers[index].imageURL,
-                  time: chatUsers[index].time,
-                  isMessageRead: (index == 0 || index == 3) ? true : false,
-                );
-              },
-            ),
-          ],
-        ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(
+            height: 30,
+          ),
+          ListView.builder(
+            itemCount: chatUsers.length,
+            shrinkWrap: true,
+            padding: const EdgeInsets.only(top: 16),
+            physics: physics,
+            itemBuilder: (context, index) {
+              return ConversationListItem(
+                id: chatUsers[index].id,
+                name: chatUsers[index].name,
+                messageText: chatUsers[index].messageText,
+                imageUrl: chatUsers[index].imageURL,
+                time: chatUsers[index].time,
+                isMessageRead: (index == 0 || index == 3) ? true : false,
+              );
+            },
+          ),
+        ],
       ),
     );
   }
