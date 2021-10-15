@@ -142,13 +142,14 @@ class RegisterForm extends StatelessWidget {
                   ),
                   child: TextButton(
                     onPressed: () async {
-                      Navigator.pushReplacement(
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) {
-                            return HomePage();
+                          builder: (_) {
+                            return const HomePage();
                           },
                         ),
+                        (_) => false,
                       );
                     },
                     child: const Icon(

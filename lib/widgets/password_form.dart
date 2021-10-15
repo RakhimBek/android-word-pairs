@@ -61,13 +61,14 @@ class PasswordForm extends StatelessWidget {
                   ),
                   child: TextButton(
                     onPressed: () async {
-                      Navigator.pushReplacement(
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) {
+                          builder: (_) {
                             return const HomePage();
                           },
                         ),
+                        (_) => false,
                       );
 
                       var sharedPreferences =
