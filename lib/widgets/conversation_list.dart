@@ -84,11 +84,11 @@ class _ConversationListState extends State<ConversationList> {
             setState(() {});
 
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: const Text(
+              content: Text(
                 'updated',
                 textAlign: TextAlign.center,
               ),
-              duration: const Duration(seconds: 1),
+              duration: Duration(seconds: 1),
             ));
           });
         },
