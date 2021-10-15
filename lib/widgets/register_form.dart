@@ -1,11 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yam/widgets/register_form.dart';
+import 'package:yam/widgets/home_page.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({Key? key}) : super(key: key);
+class RegisterForm extends StatelessWidget {
+  const RegisterForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +54,46 @@ class LoginForm extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: TextField(
+                    controller: loginController,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      hintText: "Firstname",
+                      hintStyle: TextStyle(color: Colors.black54),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  margin: const EdgeInsets.only(left: 20, right: 20),
+                  decoration: const BoxDecoration(
+                    color: CupertinoColors.systemGrey6,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: TextField(
+                    controller: loginController,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      hintText: "Last name",
+                      hintStyle: TextStyle(color: Colors.black54),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  margin: const EdgeInsets.only(left: 20, right: 20),
+                  decoration: const BoxDecoration(
+                    color: CupertinoColors.systemGrey6,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: TextField(
                     controller: passwordController,
                     obscureText: true,
                     enableSuggestions: false,
@@ -63,6 +101,29 @@ class LoginForm extends StatelessWidget {
                     textAlign: TextAlign.left,
                     decoration: const InputDecoration(
                       hintText: "Password",
+                      hintStyle: TextStyle(color: Colors.black54),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  margin: const EdgeInsets.only(left: 20, right: 20),
+                  decoration: const BoxDecoration(
+                    color: CupertinoColors.systemGrey6,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    enableSuggestions: false,
+                    autocorrect: false,
+                    textAlign: TextAlign.left,
+                    decoration: const InputDecoration(
+                      hintText: "Repeat password",
                       hintStyle: TextStyle(color: Colors.black54),
                       border: InputBorder.none,
                     ),
@@ -85,28 +146,13 @@ class LoginForm extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const RegisterForm();
+                            return HomePage();
                           },
                         ),
                       );
-
-                      var sharedPreferences =
-                          await SharedPreferences.getInstance();
-                      sharedPreferences.setString(
-                          'login', loginController.text);
-                      sharedPreferences.setString(
-                          'password', passwordController.text);
-
-                      var doc =
-                          FirebaseFirestore.instance.collection('users').doc();
-
-                      doc.set({
-                        'login': loginController.text,
-                        'password': passwordController.text,
-                      });
                     },
                     child: const Text(
-                      "LOG IN",
+                      "Register",
                       style: TextStyle(
                         color: CupertinoColors.white,
                         //backgroundColor: CupertinoColors.inactiveGray,
