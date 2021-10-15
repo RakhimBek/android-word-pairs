@@ -151,14 +151,9 @@ class RegisterForm extends StatelessWidget {
                         ),
                       );
                     },
-                    child: const Text(
-                      "Register",
-                      style: TextStyle(
-                        color: CupertinoColors.white,
-                        //backgroundColor: CupertinoColors.inactiveGray,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: const Icon(
+                      Icons.arrow_forward_outlined,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
