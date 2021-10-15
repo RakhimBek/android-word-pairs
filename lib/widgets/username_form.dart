@@ -1,8 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/password_form.dart';
+import 'package:yam/widgets/register_form.dart';
 
 class UsernameForm extends StatelessWidget {
   const UsernameForm({Key? key}) : super(key: key);
@@ -58,11 +59,13 @@ class UsernameForm extends StatelessWidget {
                   ),
                   child: TextButton(
                     onPressed: () async {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const PasswordForm();
+                            return Random().nextBool()
+                                ? const PasswordForm()
+                                : const RegisterForm();
                           },
                         ),
                       );

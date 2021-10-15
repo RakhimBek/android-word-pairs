@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yam/widgets/register_form.dart';
+import 'package:yam/widgets/home_page.dart';
 
 class PasswordForm extends StatelessWidget {
   const PasswordForm({Key? key}) : super(key: key);
@@ -65,7 +65,7 @@ class PasswordForm extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return const RegisterForm();
+                            return const HomePage();
                           },
                         ),
                       );
