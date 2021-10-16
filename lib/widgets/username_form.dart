@@ -110,7 +110,10 @@ class UsernameFormState extends State<StatefulWidget> {
                       onPressed: () async {
                         // search for existed user
                         var registeredUser = false;
-                        FirebaseFirestore.instance.collection('users').get().then((snapshot) {
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .get()
+                            .then((snapshot) {
                           snapshot.docs.forEach((element) {
                             var data = element.data();
                             if (data['username'] == usernameController.text) {
@@ -118,6 +121,13 @@ class UsernameFormState extends State<StatefulWidget> {
                             }
                           });
                         });
+
+                        var sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        sharedPreferences.setString(
+                          'username',
+                          usernameController.text,
+                        );
 
                         Navigator.push(
                           context,
@@ -129,11 +139,6 @@ class UsernameFormState extends State<StatefulWidget> {
                             },
                           ),
                         );
-
-                        var sharedPreferences =
-                            await SharedPreferences.getInstance();
-                        sharedPreferences.setString(
-                            'username', usernameController.text);
                       },
                       child: const Icon(
                         Icons.arrow_forward_outlined,
