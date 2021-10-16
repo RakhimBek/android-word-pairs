@@ -5,15 +5,27 @@ import 'package:flutter/material.dart';
 import 'package:yam/widgets/password_form.dart';
 import 'package:yam/widgets/register_form.dart';
 
-class UsernameForm extends StatelessWidget {
+class UsernameForm extends StatefulWidget {
   const UsernameForm({Key? key}) : super(key: key);
 
   @override
+  State<StatefulWidget> createState() {
+    return UsernameFormState();
+  }
+}
+
+class UsernameFormState extends State<StatefulWidget> {
+  final RegExp usernameRegExp = RegExp(r"^[a-zA-Z0-9]+$");
+
+  final TextEditingController loginController = TextEditingController(text: '');
+
+  final TextEditingController errorTextController =
+      TextEditingController(text: '');
+
+  var hasError = true;
+
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController loginController =
-        TextEditingController(text: '');
-    final TextEditingController passwordController =
-        TextEditingController(text: '');
     return MaterialApp(
       color: CupertinoColors.activeGreen,
       title: 'Flutter Demo',
@@ -22,26 +34,30 @@ class UsernameForm extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: CupertinoColors.lightBackgroundGray,
+        backgroundColor: Colors.blue.shade200.withOpacity(0.7),
         body: Stack(
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Visibility( // error flow
+                Visibility(
+                  // error flow
                   maintainSize: true,
                   maintainAnimation: true,
                   maintainState: true,
-                  visible: false,
+                  maintainInteractivity: false,
+                  maintainSemantics: false,
+                  visible: hasError,
                   child: Container(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     margin: const EdgeInsets.only(left: 20, right: 20),
-                    child: const TextField(
+                    child: TextField(
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
-                        errorText: "error message",
+                        errorText: errorTextController.text,
                         border: InputBorder.none,
+                        errorMaxLines: 5,
                       ),
                     ),
                   ),
@@ -51,10 +67,25 @@ class UsernameForm extends StatelessWidget {
                   margin: const EdgeInsets.only(left: 20, right: 20),
                   decoration: BoxDecoration(
                     color: CupertinoColors.systemGrey6,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    border: Border.all(color: Colors.red),  /// error flow
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    border: hasError
+                        ? Border.all(color: Colors.red)
+                        : Border.all(color: CupertinoColors.systemGrey6),
                   ),
                   child: TextField(
+                    onChanged: (text) {
+                      if (!usernameRegExp.hasMatch(text)) {
+                        setState(() {
+                          hasError = true;
+                          errorTextController.text =
+                              'Only English letters and digits  allowed';
+                        });
+                      } else {
+                        setState(() {
+                          hasError = false;
+                        });
+                      }
+                    },
                     controller: loginController,
                     textAlign: TextAlign.left,
                     decoration: const InputDecoration(
@@ -67,30 +98,39 @@ class UsernameForm extends StatelessWidget {
                 const SizedBox(
                   height: 3,
                 ),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: CupertinoColors.systemIndigo,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextButton(
-                    onPressed: () async {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Random().nextBool()
-                                ? const PasswordForm()
-                                : const RegisterForm();
-                          },
-                        ),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.arrow_forward_outlined,
-                      color: Colors.white70,
+                Visibility(
+                  // error flow
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  maintainInteractivity: false,
+                  maintainSemantics: false,
+                  visible: !hasError,
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    decoration: const BoxDecoration(
+                      color: CupertinoColors.systemIndigo,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: TextButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Random().nextBool()
+                                  ? const PasswordForm()
+                                  : const RegisterForm();
+                            },
+                          ),
+                        );
+                      },
+                      child: const Icon(
+                        Icons.arrow_forward_outlined,
+                        color: Colors.white70,
+                      ),
                     ),
                   ),
                 ),
