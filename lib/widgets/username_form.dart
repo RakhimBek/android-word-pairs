@@ -15,12 +15,9 @@ class UsernameForm extends StatefulWidget {
 }
 
 class UsernameFormState extends State<StatefulWidget> {
-  final RegExp usernameRegExp = RegExp(r"^[a-zA-Z0-9]+$");
+  final RegExp usernameRegExp = RegExp(r"^[a-z0-9]+$");
 
   final TextEditingController loginController = TextEditingController(text: '');
-
-  final TextEditingController errorTextController =
-      TextEditingController(text: '');
 
   var hasError = true;
 
@@ -52,10 +49,10 @@ class UsernameFormState extends State<StatefulWidget> {
                   child: Container(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     margin: const EdgeInsets.only(left: 20, right: 20),
-                    child: TextField(
+                    child: const TextField(
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
-                        errorText: errorTextController.text,
+                        errorText: 'Only English lowercase letters and digits  allowed',
                         border: InputBorder.none,
                         errorMaxLines: 5,
                       ),
@@ -74,17 +71,9 @@ class UsernameFormState extends State<StatefulWidget> {
                   ),
                   child: TextField(
                     onChanged: (text) {
-                      if (!usernameRegExp.hasMatch(text)) {
-                        setState(() {
-                          hasError = true;
-                          errorTextController.text =
-                              'Only English letters and digits  allowed';
-                        });
-                      } else {
-                        setState(() {
-                          hasError = false;
-                        });
-                      }
+                      setState(() {
+                        hasError = !usernameRegExp.hasMatch(text);
+                      });
                     },
                     controller: loginController,
                     textAlign: TextAlign.left,
