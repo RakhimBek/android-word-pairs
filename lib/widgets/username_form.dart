@@ -29,12 +29,30 @@ class UsernameForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Visibility( // error flow
+                  maintainSize: true,
+                  maintainAnimation: true,
+                  maintainState: true,
+                  visible: false,
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    child: const TextField(
+                      textAlign: TextAlign.left,
+                      decoration: InputDecoration(
+                        errorText: "error message",
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
                 Container(
                   padding: const EdgeInsets.only(left: 10, right: 10),
                   margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: CupertinoColors.systemGrey6,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(color: Colors.red),  /// error flow
                   ),
                   child: TextField(
                     controller: loginController,
