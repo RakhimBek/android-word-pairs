@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -53,7 +54,8 @@ class UsernameFormState extends State<StatefulWidget> {
                     child: const TextField(
                       textAlign: TextAlign.left,
                       decoration: InputDecoration(
-                        errorText: 'Only English lowercase letters and digits  allowed',
+                        errorText:
+                            'Only English lowercase letters and digits  allowed',
                         border: InputBorder.none,
                         errorMaxLines: 5,
                       ),
@@ -106,19 +108,32 @@ class UsernameFormState extends State<StatefulWidget> {
                     ),
                     child: TextButton(
                       onPressed: () async {
+                        // search for existed user
+                        var registeredUser = false;
+                        FirebaseFirestore.instance.collection('users').get().then((snapshot) {
+                          snapshot.docs.forEach((element) {
+                            var data = element.data();
+                            if (data['username'] == usernameController.text) {
+                              registeredUser = true;
+                            }
+                          });
+                        });
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return Random().nextBool()
+                              return registeredUser
                                   ? const PasswordForm()
                                   : RegisterForm();
                             },
                           ),
                         );
 
-                        var sharedPreferences = await SharedPreferences.getInstance();
-                        sharedPreferences.setString('username', usernameController.text);
+                        var sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        sharedPreferences.setString(
+                            'username', usernameController.text);
                       },
                       child: const Icon(
                         Icons.arrow_forward_outlined,
