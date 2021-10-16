@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/password_form.dart';
 import 'package:yam/widgets/register_form.dart';
 
@@ -17,7 +18,7 @@ class UsernameForm extends StatefulWidget {
 class UsernameFormState extends State<StatefulWidget> {
   final RegExp usernameRegExp = RegExp(r"^[a-z0-9]+$");
 
-  final TextEditingController loginController = TextEditingController(text: '');
+  final usernameController = TextEditingController(text: '');
 
   var hasError = true;
 
@@ -75,7 +76,7 @@ class UsernameFormState extends State<StatefulWidget> {
                         hasError = !usernameRegExp.hasMatch(text);
                       });
                     },
-                    controller: loginController,
+                    controller: usernameController,
                     textAlign: TextAlign.left,
                     decoration: const InputDecoration(
                       hintText: "Username",
@@ -111,10 +112,13 @@ class UsernameFormState extends State<StatefulWidget> {
                             builder: (context) {
                               return Random().nextBool()
                                   ? const PasswordForm()
-                                  : const RegisterForm();
+                                  : RegisterForm();
                             },
                           ),
                         );
+
+                        var sharedPreferences = await SharedPreferences.getInstance();
+                        sharedPreferences.setString('username', usernameController.text);
                       },
                       child: const Icon(
                         Icons.arrow_forward_outlined,

@@ -1,14 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/home_page.dart';
 
 class RegisterForm extends StatelessWidget {
-  const RegisterForm({Key? key}) : super(key: key);
+  final usernameController = TextEditingController(text: '');
+  final fullnameController = TextEditingController(text: '');
+  final passwordController = TextEditingController(text: '');
+  final repeatPasswordController = TextEditingController(text: '');
+
+  RegisterForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController loginController =
-        TextEditingController(text: '');
+    SharedPreferences.getInstance().then((value) {
+      usernameController.text = value.getString('username')!;
+    });
+
     final TextEditingController passwordController =
         TextEditingController(text: '');
     return MaterialApp(
@@ -34,7 +43,7 @@ class RegisterForm extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: TextField(
-                    controller: loginController,
+                    controller: usernameController,
                     textAlign: TextAlign.left,
                     decoration: const InputDecoration(
                       hintText: "Username",
@@ -54,30 +63,10 @@ class RegisterForm extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: TextField(
-                    controller: loginController,
+                    controller: fullnameController,
                     textAlign: TextAlign.left,
                     decoration: const InputDecoration(
-                      hintText: "Firstname",
-                      hintStyle: TextStyle(color: Colors.black54),
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 3,
-                ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: CupertinoColors.systemGrey6,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextField(
-                    controller: loginController,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      hintText: "Last name",
+                      hintText: "Fullname",
                       hintStyle: TextStyle(color: Colors.black54),
                       border: InputBorder.none,
                     ),
@@ -117,7 +106,7 @@ class RegisterForm extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
                   child: TextField(
-                    controller: passwordController,
+                    controller: repeatPasswordController,
                     obscureText: true,
                     enableSuggestions: false,
                     autocorrect: false,
@@ -151,6 +140,16 @@ class RegisterForm extends StatelessWidget {
                         ),
                         (_) => false,
                       );
+
+                      var userDoc = FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(usernameController.text);
+
+                      userDoc.set({
+                        'username': usernameController.text,
+                        'password': passwordController.text,
+                        'fullname': fullnameController.text
+                      });
                     },
                     child: const Icon(
                       Icons.arrow_forward_outlined,

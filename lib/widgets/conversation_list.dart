@@ -38,32 +38,21 @@ class _ConversationListState extends State<ConversationList> {
 
   @override
   void initState() {
-    chatUsers.addAll([
-      ChatUsers(
-        id: 'id001',
-        name: "Илья Годяев",
-        messageText: "Ага",
-        imageURL:
-            "https://sun4-11.userapi.com/s/v1/if1/zuF1UsBOMZ5ApE1VB9EJFjWbZq7RXChRw_tXomSRB9DiH2tPYyZeqDUhhBmkHC-tO-UpaH2m.jpg?size=100x100&quality=96&crop=0,8,1010,1010&ava=1",
-        time: "Yesterday",
-      ),
-      ChatUsers(
-        id: 'id002',
-        name: "Илья Симоненко",
-        messageText: "Не",
-        imageURL:
-            "https://sun4-15.userapi.com/s/v1/if1/zZVazCrWYbV7PizVFpAYPTTXIbgqdDp9-7FE43BR6giGZeeGX4CHA_ioA71Bx8MN9Nab8ln5.jpg?size=100x100&quality=96&crop=285,184,1182,1182&ava=1",
-        time: "Yesterday",
-      ),
-      ChatUsers(
-        id: 'id003',
-        name: "Раимбек Рахимбеков",
-        messageText: "..",
-        imageURL:
-            "https://sun4-15.userapi.com/s/v1/ig2/gRyj33y7Ypu9s4qtQDOidCML_oAm1EPS7JN0XAHP0HO0Prtd1jtE-exlAT4dIB0ITWmSxcuMHxI_XRYrcLJYL3Ld.jpg?size=200x200&quality=96&crop=233,1,749,749&ava=1",
-        time: "Yesterday",
-      ),
-    ]);
+    print('INIT STATE!!!!');
+
+    FirebaseFirestore.instance.collection('users').get().then((snapshot) {
+      snapshot.docs.forEach((element) {
+        var data = element.data();
+        chatUsers.add(ChatUsers(
+          id: data['username'],
+          name: data['fullname'],
+          messageText: "Не",
+          imageURL: null,
+          time: "Yesterday",
+        ));
+      });
+    });
+
     super.initState();
   }
 
@@ -77,21 +66,18 @@ class _ConversationListState extends State<ConversationList> {
       key: scaffoldKey,
       body: RefreshIndicator(
         onRefresh: () async {
-          print('onRefresh');
-
-          var querySnapshot =
-              await FirebaseFirestore.instance.collection('users').get();
-
-          querySnapshot.docs.forEach((element) {
-            var data = element.data();
-            chatUsers.clear();
-            chatUsers.add(ChatUsers(
-              id: data['login'],
-              name: data['login'],
-              messageText: "Не",
-              imageURL: null,
-              time: "Yesterday",
-            ));
+          chatUsers.clear();
+          FirebaseFirestore.instance.collection('users').get().then((snapshot) {
+            snapshot.docs.forEach((element) {
+              var data = element.data();
+              chatUsers.add(ChatUsers(
+                id: data['username'],
+                name: data['fullname'],
+                messageText: "Не",
+                imageURL: null,
+                time: "Yesterday",
+              ));
+            });
           });
 
           return Future.delayed(const Duration(milliseconds: 500), () {
