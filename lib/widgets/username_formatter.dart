@@ -16,19 +16,12 @@ class UsernameFormatter extends TextInputFormatter {
       return newValue;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      new SnackBar(
-        content: new Text('hvbh'),
-        duration: Duration(seconds: 5),
-      ),
-    );
-
-    //Flushbar(
-    //  message: 'Only lowercase English letters and digits allowed',
-    //  duration: Duration(seconds: 5),
-    //  messageColor: Colors.white,
-    //  backgroundColor: Colors.transparent,
-    //).show(context);
+    Flushbar(
+      message: 'Only lowercase English letters and digits allowed',
+      duration: Duration(seconds: 5),
+      messageColor: Colors.white,
+      backgroundColor: Colors.transparent,
+    ).show(context);
     return oldValue;
   }
 }
