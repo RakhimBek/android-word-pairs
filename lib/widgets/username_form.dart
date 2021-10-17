@@ -35,7 +35,7 @@ class UsernameFormState extends State<StatefulWidget> {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.blue.shade200.withOpacity(0.7),
+        backgroundColor: Colors.indigo.shade900,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -66,13 +66,13 @@ class UsernameFormState extends State<StatefulWidget> {
               padding: const EdgeInsets.only(left: 10, right: 10),
               margin: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
-                color: CupertinoColors.systemGrey6,
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                color: Colors.transparent,
                 border: hasError
-                    ? Border.all(color: Colors.red)
-                    : Border.all(color: CupertinoColors.systemGrey6),
+                    ? const Border(bottom: BorderSide(color: Colors.red))
+                    : const Border(bottom: BorderSide(width: 2, color: Colors.blueGrey)),
               ),
               child: TextField(
+                style: const TextStyle(color: Colors.white),
                 autofocus: true,
                 enableSuggestions: true,
                 onChanged: (text) {
@@ -87,7 +87,7 @@ class UsernameFormState extends State<StatefulWidget> {
                 textAlign: TextAlign.left,
                 decoration: const InputDecoration(
                   hintText: "Username",
-                  hintStyle: TextStyle(color: Colors.black54),
+                  hintStyle: TextStyle(color: Colors.white),
                   border: InputBorder.none,
                 ),
               ),
