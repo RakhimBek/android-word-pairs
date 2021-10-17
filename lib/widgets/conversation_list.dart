@@ -50,6 +50,8 @@ class _ConversationListState extends State<ConversationList> {
           imageURL: null,
           time: "Yesterday",
         ));
+
+        setState(() {});
       });
     });
 
@@ -94,29 +96,32 @@ class _ConversationListState extends State<ConversationList> {
             ));
           });
         },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            const SizedBox(
-              height: 30,
-            ),
-            ListView.builder(
-              itemCount: chatUsers.length,
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(top: 16),
-              physics: physics,
-              itemBuilder: (context, index) {
-                return ConversationListItem(
-                  id: chatUsers[index].id,
-                  name: chatUsers[index].name,
-                  messageText: chatUsers[index].messageText,
-                  imageUrl: chatUsers[index].imageURL,
-                  time: chatUsers[index].time,
-                  isMessageRead: (index == 0 || index == 3) ? true : false,
-                );
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          physics: physics,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(
+                height: 30,
+              ),
+              ListView.builder(
+                itemCount: chatUsers.length,
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(top: 16),
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return ConversationListItem(
+                    id: chatUsers[index].id,
+                    name: chatUsers[index].name,
+                    messageText: chatUsers[index].messageText,
+                    imageUrl: chatUsers[index].imageURL,
+                    time: chatUsers[index].time,
+                    isMessageRead: (index == 0 || index == 3) ? true : false,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
