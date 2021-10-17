@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/password_form.dart';
 import 'package:yam/widgets/register_form.dart';
+import 'package:yam/widgets/username_formatter.dart';
 
 class UsernameForm extends StatefulWidget {
   const UsernameForm({Key? key}) : super(key: key);
@@ -73,12 +75,17 @@ class UsernameFormState extends State<StatefulWidget> {
                         : Border.all(color: CupertinoColors.systemGrey6),
                   ),
                   child: TextField(
+                    autofocus: true,
+                    enableSuggestions: true,
                     onChanged: (text) {
                       setState(() {
                         hasError = !usernameRegExp.hasMatch(text);
                       });
                     },
                     controller: usernameController,
+                    inputFormatters: [
+                      UsernameFormatter(context),
+                    ],
                     textAlign: TextAlign.left,
                     decoration: const InputDecoration(
                       hintText: "Username",
