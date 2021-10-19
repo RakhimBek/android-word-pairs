@@ -86,8 +86,6 @@ class _ConversationListState extends State<ConversationList> {
           return Future.delayed(const Duration(milliseconds: 500), () {
             print('The function that changees state');
 
-            setState(() {});
-
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text(
                 'updated',
