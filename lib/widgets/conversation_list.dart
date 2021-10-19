@@ -64,6 +64,7 @@ class _ConversationListState extends State<ConversationList> {
         .applyTo(const AlwaysScrollableScrollPhysics());
 
     final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+    final UniqueKey dissmissibleItemKey = UniqueKey();
     return Scaffold(
       key: scaffoldKey,
       body: RefreshIndicator(
@@ -110,13 +111,29 @@ class _ConversationListState extends State<ConversationList> {
                 padding: const EdgeInsets.only(top: 16),
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
-                  return ConversationListItem(
-                    id: chatUsers[index].id,
-                    name: chatUsers[index].name,
-                    messageText: chatUsers[index].messageText,
-                    imageUrl: chatUsers[index].imageURL,
-                    time: chatUsers[index].time,
-                    isMessageRead: (index == 0 || index == 3) ? true : false,
+                  return Dismissible(
+                    key: dissmissibleItemKey,
+                    onDismissed: (direction) async {
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(chatUsers[index].id)
+                          .delete();
+                    },
+                    confirmDismiss: (direction) {
+                      return Future<bool?>(() {
+                        return DismissDirection.endToStart == direction;
+                      });
+                    },
+                    direction: DismissDirection.endToStart,
+                    background: Container(color: Colors.red),
+                    child: ConversationListItem(
+                      id: chatUsers[index].id,
+                      name: chatUsers[index].name,
+                      messageText: chatUsers[index].messageText,
+                      imageUrl: chatUsers[index].imageURL,
+                      time: chatUsers[index].time,
+                      isMessageRead: (index == 0 || index == 3) ? true : false,
+                    ),
                   );
                 },
               ),
