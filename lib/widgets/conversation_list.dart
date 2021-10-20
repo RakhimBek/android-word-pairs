@@ -68,23 +68,22 @@ class _ConversationListState extends State<ConversationList> {
     return Scaffold(
       key: scaffoldKey,
       body: RefreshIndicator(
-        onRefresh: () async {
-          chatUsers.clear();
-          FirebaseFirestore.instance.collection('users').get().then((snapshot) {
-            snapshot.docs.forEach((element) {
-              var data = element.data();
-              chatUsers.add(ChatUsers(
-                id: data['username'],
-                name: data['fullname'],
-                messageText: "Не",
-                imageURL: null,
-                time: "Yesterday",
-              ));
-            });
-          });
-
-          return Future.delayed(const Duration(milliseconds: 500), () {
-            print('The function that changees state');
+        onRefresh: () {
+          return Future(() async {
+            chatUsers.clear();
+            FirebaseFirestore.instance.collection('users').get().then((snapshot) {
+                snapshot.docs.forEach((element) {
+                  var data = element.data();
+                  chatUsers.add(ChatUsers(
+                    id: data['username'],
+                    name: data['fullname'],
+                    messageText: "Не",
+                    imageURL: null,
+                    time: "Yesterday",
+                  ));
+                });
+              },
+            );
 
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content: Text(
