@@ -17,31 +17,23 @@ class RegisterFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      maintainSize: true,
-      maintainAnimation: true,
-      maintainState: true,
-      maintainInteractivity: false,
-      maintainSemantics: false,
-      visible: true,
-      child: Container(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        margin: const EdgeInsets.only(left: 20, right: 20),
-        decoration: const BoxDecoration(
-          color: CupertinoColors.systemGrey6,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: TextField(
-          controller: controller,
-          obscureText: obscureText,
-          enableSuggestions: false,
-          autocorrect: false,
-          textAlign: TextAlign.left,
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: const TextStyle(color: Colors.black54),
-            border: InputBorder.none,
-          ),
+    return Container(
+      padding: const EdgeInsets.only(left: 10, right: 10),
+      margin: const EdgeInsets.only(left: 20, right: 20),
+      decoration: const BoxDecoration(
+        color: CupertinoColors.systemGrey6,
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        enableSuggestions: false,
+        autocorrect: false,
+        textAlign: TextAlign.left,
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: const TextStyle(color: Colors.black54),
+          border: InputBorder.none,
         ),
       ),
     );
