@@ -5,14 +5,14 @@ class RegisterFormField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
-  final bool visibility;
+  final bool hasError;
 
   const RegisterFormField({
     Key? key,
     required this.controller,
     required this.hintText,
     required this.obscureText,
-    this.visibility = true,
+    this.hasError = false,
   }) : super(key: key);
 
   @override
@@ -20,9 +20,10 @@ class RegisterFormField extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10),
       margin: const EdgeInsets.only(left: 20, right: 20),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: CupertinoColors.systemGrey6,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        border: Border.all(color: hasError ? Colors.red : Colors.transparent),
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: TextField(
         controller: controller,
