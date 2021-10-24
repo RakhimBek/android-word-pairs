@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/home_page.dart';
+import 'package:yam/widgets/register_form_field.dart';
 
 class RegisterForm extends StatelessWidget {
   final usernameController = TextEditingController(text: '');
@@ -35,88 +36,34 @@ class RegisterForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: CupertinoColors.systemGrey6,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextField(
-                    controller: usernameController,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      hintText: "Username",
-                      hintStyle: TextStyle(color: Colors.black54),
-                      border: InputBorder.none,
-                    ),
-                  ),
+                RegisterFormField(
+                  controller: usernameController,
+                  hintText: "Username",
+                  obscureText: false,
                 ),
                 const SizedBox(
                   height: 3,
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: CupertinoColors.systemGrey6,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextField(
-                    controller: fullnameController,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      hintText: "Fullname",
-                      hintStyle: TextStyle(color: Colors.black54),
-                      border: InputBorder.none,
-                    ),
-                  ),
+                RegisterFormField(
+                  controller: fullnameController,
+                  hintText: "Fullname",
+                  obscureText: false,
                 ),
                 const SizedBox(
                   height: 3,
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: CupertinoColors.systemGrey6,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      hintText: "Password",
-                      hintStyle: TextStyle(color: Colors.black54),
-                      border: InputBorder.none,
-                    ),
-                  ),
+                RegisterFormField(
+                  controller: passwordController,
+                  hintText: "Password",
+                  obscureText: true,
                 ),
                 const SizedBox(
                   height: 3,
                 ),
-                Container(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    color: CupertinoColors.systemGrey6,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: TextField(
-                    controller: repeatPasswordController,
-                    obscureText: true,
-                    enableSuggestions: false,
-                    autocorrect: false,
-                    textAlign: TextAlign.left,
-                    decoration: const InputDecoration(
-                      hintText: "Repeat password",
-                      hintStyle: TextStyle(color: Colors.black54),
-                      border: InputBorder.none,
-                    ),
-                  ),
+                RegisterFormField(
+                  controller: repeatPasswordController,
+                  hintText: "Repeat password",
+                  obscureText: true,
                 ),
                 const SizedBox(
                   height: 3,
