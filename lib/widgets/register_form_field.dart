@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegisterFormField extends StatefulWidget {
   final TextEditingController controller;
@@ -7,6 +8,7 @@ class RegisterFormField extends StatefulWidget {
   final bool obscureText;
   final bool hasError;
   final bool Function(String text) validator;
+  final List<TextInputFormatter> inputFormatters;
 
   bool hasErro = false;
 
@@ -15,6 +17,7 @@ class RegisterFormField extends StatefulWidget {
     required this.controller,
     required this.hintText,
     required this.obscureText,
+    this.inputFormatters = const [],
     this.hasError = false,
     this.validator = trueFunction,
   }) : super(key: key);
@@ -30,6 +33,7 @@ class RegisterFormField extends StatefulWidget {
       hintText: hintText,
       obscureText: obscureText,
       validator: validator,
+      inputFormatters: inputFormatters,
     );
   }
 }
@@ -39,6 +43,7 @@ class RegisterFormFieldState extends State<StatefulWidget> {
   final String hintText;
   final bool obscureText;
   final bool Function(String text) validator;
+  final List<TextInputFormatter> inputFormatters;
   bool isValid = false;
 
   RegisterFormFieldState({
@@ -46,6 +51,7 @@ class RegisterFormFieldState extends State<StatefulWidget> {
     required this.hintText,
     required this.obscureText,
     required this.validator,
+    required this.inputFormatters,
   }) {
     isValid = validator(controller.text);
   }
@@ -71,6 +77,7 @@ class RegisterFormFieldState extends State<StatefulWidget> {
         enableSuggestions: false,
         autocorrect: false,
         textAlign: TextAlign.left,
+        inputFormatters: inputFormatters,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(color: Colors.black54),

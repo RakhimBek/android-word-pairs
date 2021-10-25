@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yam/widgets/home_page.dart';
 import 'package:yam/widgets/register_form_field.dart';
+import 'package:yam/widgets/username_formatter.dart';
 
 class RegisterForm extends StatelessWidget {
   final regExp = RegExp(r'^[a-z0-9]*$');
@@ -43,6 +44,9 @@ class RegisterForm extends StatelessWidget {
                   hintText: "Username",
                   obscureText: false,
                   validator: (text) => regExp.hasMatch(text),
+                  inputFormatters: [
+                    UsernameFormatter(context),
+                  ],
                 ),
                 const SizedBox(
                   height: 3,
