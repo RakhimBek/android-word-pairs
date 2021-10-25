@@ -6,6 +6,8 @@ import 'package:yam/widgets/home_page.dart';
 import 'package:yam/widgets/register_form_field.dart';
 
 class RegisterForm extends StatelessWidget {
+  final regExp = RegExp(r'^[a-z0-9]*$');
+
   final usernameController = TextEditingController(text: '');
   final fullnameController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
@@ -40,6 +42,7 @@ class RegisterForm extends StatelessWidget {
                   controller: usernameController,
                   hintText: "Username",
                   obscureText: false,
+                  validator: (text) => regExp.hasMatch(text),
                 ),
                 const SizedBox(
                   height: 3,
