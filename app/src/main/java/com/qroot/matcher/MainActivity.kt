@@ -1,9 +1,11 @@
 package com.qroot.matcher
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -56,12 +58,13 @@ class MainActivity : ComponentActivity() {
                                         Modifier
                                             .weight(1F)
                                             .fillMaxWidth(0.5f)
+                                            .clickable { Log.d("zhmack", "onCreate: Yup!!") }
                                     )
                                 }
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
                                     modifier = Modifier
-                                        .background(Color.Green)
+                                        .padding(start = 2.dp)
                                 ) {
                                     Greeting(
                                         entry.second,
@@ -69,6 +72,7 @@ class MainActivity : ComponentActivity() {
                                             .weight(1F)
                                             .background(Color.Blue)
                                             .fillMaxWidth(1f)
+                                            .clickable { Log.d("zhmack", "onCreate: Yop!") }
                                     )
                                 }
                             }
