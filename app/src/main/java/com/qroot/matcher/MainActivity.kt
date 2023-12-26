@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.ripple.rememberRipple
@@ -54,7 +53,6 @@ class MainActivity : ComponentActivity() {
                             Row(
                                 modifier = Modifier
                                     .wrapContentHeight()
-                                    .padding(top = 1.dp)
                                     .height(50.dp)
                             ) {
                                 WordCell(
@@ -77,6 +75,7 @@ class MainActivity : ComponentActivity() {
                                         .clickable { Log.d("zhmack", "onCreate: Yop!") }
                                 )
                             }
+                            Row(modifier = Modifier.height(1.dp)) {}
                         }
                     }
                 }
