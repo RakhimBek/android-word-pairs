@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
                             ) {
                                 Column(
                                 ) {
-                                    Greeting(
+                                    WordCell(
                                         entry.first,
                                         Modifier
                                             .weight(1F)
@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
                                     modifier = Modifier
                                         .padding(start = 2.dp)
                                 ) {
-                                    Greeting(
+                                    WordCell(
                                         entry.second,
                                         Modifier
                                             .weight(1F)
@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun WordCell(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "[$name]",
         modifier = modifier.background(Color.Yellow)
@@ -96,7 +96,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     WordMatcherTheme {
-        Greeting("Android BIR")
-        Greeting("Android EKI")
+        WordCell("Android BIR")
+        WordCell("Android EKI")
     }
 }
