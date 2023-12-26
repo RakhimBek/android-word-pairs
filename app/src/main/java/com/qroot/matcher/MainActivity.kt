@@ -6,6 +6,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -18,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,16 +41,12 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    // state
+                    val dictionary = WordPairsDictionary()
+                    val wordPairs = dictionary.getAll()
+
                     Column {
-                        val pairs = listOf(
-                            Pair("bir", "one"),
-                            Pair("eki", "two"),
-                            Pair("ush", "two"),
-                            Pair("tort", "three"),
-                            Pair("bes", "three"),
-                            Pair("alty", "three")
-                        )
-                        for (entry in pairs) {
+                        for (entry in wordPairs) {
                             Row(
                                 modifier = Modifier
                                     .wrapContentHeight()
@@ -80,7 +79,22 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun WordCell(name: String, modifier: Modifier) {
-    var color by remember { mutableStateOf(Color.Yellow) }
+    val wordCellColor = Color.LightGray
+    var color by remember { mutableStateOf(wordCellColor) }
+    val interactionSource = remember { MutableInteractionSource() }
+        .also { interactionSource ->
+            LaunchedEffect(interactionSource) {
+                interactionSource.interactions.collect {
+                    if (it is PressInteraction.Release) {
+                        color = wordCellColor
+                    } else if (it is PressInteraction.Press) {
+                        color = Color.Green
+                    } else if (it is PressInteraction.Cancel) {
+                        color = wordCellColor
+                    }
+                }
+            }
+        }
     Column(
         Modifier.padding(start = 1.dp, end = 1.dp, top = 1.dp, bottom = 1.dp)
     ) {
@@ -88,9 +102,13 @@ fun WordCell(name: String, modifier: Modifier) {
             text = "[$name]",
             modifier = modifier
                 .background(color)
-                .clickable {
-                    color = if (color == Color.Green) Color.Unspecified else Color.Green
-                },
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null,
+                    onClick = {
+                        Log.d("BRR", "WordCell: BRRR")
+                    }
+                ),
         )
     }
 }
