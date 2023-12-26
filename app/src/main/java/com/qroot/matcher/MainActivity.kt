@@ -18,7 +18,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,30 +50,21 @@ class MainActivity : ComponentActivity() {
                                     .padding(top = 1.dp)
                                     .height(IntrinsicSize.Min)
                             ) {
-                                Column(
-                                ) {
-                                    WordCell(
-                                        entry.first,
-                                        Modifier
-                                            .weight(1F)
-                                            .fillMaxWidth(0.5f)
-                                            .clickable { Log.d("zhmack", "onCreate: Yup!!") }
-                                    )
-                                }
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier
-                                        .padding(start = 2.dp)
-                                ) {
-                                    WordCell(
-                                        entry.second,
-                                        Modifier
-                                            .weight(1F)
-                                            .background(Color.Blue)
-                                            .fillMaxWidth(1f)
-                                            .clickable { Log.d("zhmack", "onCreate: Yop!") }
-                                    )
-                                }
+                                WordCell(
+                                    entry.first,
+                                    Modifier
+                                        .weight(1F)
+                                        .fillMaxWidth(0.5f)
+                                        .clickable { Log.d("zhmack", "onCreate: Yup!!") }
+                                )
+                                WordCell(
+                                    entry.second,
+                                    Modifier
+                                        .weight(1F)
+                                        .background(Color.Blue)
+                                        .fillMaxWidth(1f)
+                                        .clickable { Log.d("zhmack", "onCreate: Yop!") }
+                                )
                             }
                         }
                     }
@@ -86,10 +76,14 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun WordCell(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "[$name]",
-        modifier = modifier.background(Color.Yellow)
-    )
+    Column(
+        Modifier.padding(start = 1.dp, end = 1.dp, top = 1.dp, bottom = 1.dp)
+    ) {
+        Text(
+            text = "[$name]",
+            modifier = modifier.background(Color.Yellow)
+        )
+    }
 }
 
 @Preview(showBackground = true)
