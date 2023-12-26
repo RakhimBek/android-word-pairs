@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -86,11 +87,11 @@ fun WordCell(name: String, modifier: Modifier) {
             LaunchedEffect(interactionSource) {
                 interactionSource.interactions.collect {
                     if (it is PressInteraction.Release) {
-                        color = wordCellColor
+                        //color = wordCellColor
                     } else if (it is PressInteraction.Press) {
-                        color = Color.Green
+                        color = Color.DarkGray
                     } else if (it is PressInteraction.Cancel) {
-                        color = wordCellColor
+                        //color = wordCellColor
                     }
                 }
             }
@@ -104,7 +105,11 @@ fun WordCell(name: String, modifier: Modifier) {
                 .background(color)
                 .clickable(
                     interactionSource = interactionSource,
-                    indication = null,
+                    indication = rememberRipple(
+                        bounded = true,
+                        radius = 250.dp,
+                        color = Color.Yellow
+                    ),
                     onClick = {
                         Log.d("BRR", "WordCell: BRRR")
                     }
