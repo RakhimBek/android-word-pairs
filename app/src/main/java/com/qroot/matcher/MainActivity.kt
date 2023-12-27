@@ -4,6 +4,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.repeatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -29,7 +34,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.qroot.matcher.ui.theme.WordMatcherTheme
@@ -88,6 +95,7 @@ class MainActivity : ComponentActivity() {
 fun WordCell(name: String, modifier: Modifier) {
     val wordCellColor = Color.LightGray
     var color by remember { mutableStateOf(wordCellColor) }
+    var shake by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
         .also { interactionSource ->
             LaunchedEffect(interactionSource) {
@@ -110,6 +118,7 @@ fun WordCell(name: String, modifier: Modifier) {
                 .fillMaxHeight()
                 .fillMaxWidth()
                 .background(color)
+                .shake(shake, { shake = false })
                 .clickable(
                     interactionSource = interactionSource,
                     indication = rememberRipple(
@@ -119,6 +128,8 @@ fun WordCell(name: String, modifier: Modifier) {
                     ),
                     onClick = {
                         Log.d("BRR", "WordCell: BRRR")
+                        shake = true
+
                     }
                 ),
             verticalAlignment = Alignment.CenterVertically,
@@ -132,6 +143,25 @@ fun WordCell(name: String, modifier: Modifier) {
         }
     }
 }
+
+fun Modifier.shake(enabled: Boolean, onAnimationFinish: () -> Unit) = composed(
+    factory = {
+        val distance by animateFloatAsState(
+            targetValue = if (enabled) 15f else 0f,
+            animationSpec = repeatable(
+                iterations = 8,
+                animation = tween(durationMillis = 50, easing = LinearEasing),
+                repeatMode = RepeatMode.Reverse
+            ),
+            finishedListener = { onAnimationFinish.invoke() },
+            label = ""
+        )
+
+        Modifier.graphicsLayer {
+            translationX = if (enabled) distance else 0f
+        }
+    }
+)
 
 @Preview(showBackground = true)
 @Composable
