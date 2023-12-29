@@ -56,6 +56,8 @@ class MainActivity : ComponentActivity() {
                     val wordPairs = dictionary.getAll()
 
                     Column {
+                        var left = ""
+                        var right = ""
                         for (entry in wordPairs) {
                             Row(
                                 modifier = Modifier
@@ -68,8 +70,17 @@ class MainActivity : ComponentActivity() {
                                         .weight(1F)
                                         .fillMaxWidth(0.5f)
                                         .fillMaxHeight()
-                                        .clickable { Log.d("zhmack", "onCreate: Yup!!") }
-                                )
+                                ) {
+                                    left = entry.first
+                                    if (!left.isEmpty() && !right.isEmpty()) {
+                                        val result = dictionary.contains(left, right)
+                                        left = ""
+                                        right = ""
+                                        result
+                                    } else {
+                                        true
+                                    }
+                                }
                                 // separator
                                 Column(modifier = Modifier.width(1.dp)) {}
                                 WordCell(
@@ -79,8 +90,17 @@ class MainActivity : ComponentActivity() {
                                         .background(Color.Blue)
                                         .fillMaxWidth(1f)
                                         .fillMaxHeight()
-                                        .clickable { Log.d("zhmack", "onCreate: Yop!") }
-                                )
+                                ) {
+                                    right = entry.second
+                                    if (!left.isEmpty() && !right.isEmpty()) {
+                                        val result = dictionary.contains(left, right)
+                                        left = ""
+                                        right = ""
+                                        result
+                                    } else {
+                                        true
+                                    }
+                                }
                             }
                             Row(modifier = Modifier.height(1.dp)) {}
                         }
@@ -92,8 +112,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun WordCell(name: String, modifier: Modifier) {
+fun WordCell(name: String, modifier: Modifier, onClick: () -> Boolean = { true }) {
     val wordCellColor = Color.LightGray
+    var okColor by remember { mutableStateOf(Color.Green) }
     var color by remember { mutableStateOf(wordCellColor) }
     var shake by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
@@ -103,7 +124,7 @@ fun WordCell(name: String, modifier: Modifier) {
                     if (it is PressInteraction.Release) {
                         //color = wordCellColor
                     } else if (it is PressInteraction.Press) {
-                        color = Color.DarkGray
+                        //color = Color.DarkGray
                     } else if (it is PressInteraction.Cancel) {
                         //color = wordCellColor
                     }
@@ -124,12 +145,12 @@ fun WordCell(name: String, modifier: Modifier) {
                     indication = rememberRipple(
                         bounded = true,
                         radius = 250.dp,
-                        color = Color.Yellow
+                        color = okColor
                     ),
                     onClick = {
                         Log.d("BRR", "WordCell: BRRR")
                         shake = true
-
+                        okColor = if (onClick()) Color.Green else Color.Red
                     }
                 ),
             verticalAlignment = Alignment.CenterVertically,

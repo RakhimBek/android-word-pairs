@@ -19,4 +19,8 @@ class WordPairsDictionary : Application() {
     fun getAll(): List<Pair<String, String>> {
         return dictionary
     }
+
+    fun contains(left: String, right: String): Boolean {
+        return dictionary.stream().anyMatch { p -> p.first == left && p.second == right }
+    }
 }
