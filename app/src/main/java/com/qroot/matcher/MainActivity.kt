@@ -60,8 +60,8 @@ class MainActivity : ComponentActivity() {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
-                            var left = ""
-                            var right = ""
+                            var left by remember { mutableStateOf("") }
+                            var right by remember { mutableStateOf("") }
 
                             for (entry in wordPairs) {
                                 WordRow(entry, {
@@ -85,7 +85,7 @@ class MainActivity : ComponentActivity() {
                                         true
                                     }
                                 })
-                                Row(modifier = Modifier.height(3.dp)) {}
+                                RowSeparator()
                             }
                         }
                     }
@@ -111,7 +111,7 @@ fun WordRow(entry: Pair<String, String>, leftOnClick: () -> Boolean, rightOnClic
             leftOnClick
         )
         // separator
-        Column(modifier = Modifier.width(1.dp)) {}
+        ColumnSeparator()
         WordCell(
             entry.second,
             Modifier
@@ -122,6 +122,16 @@ fun WordRow(entry: Pair<String, String>, leftOnClick: () -> Boolean, rightOnClic
             rightOnClick
         )
     }
+}
+
+@Composable
+fun ColumnSeparator() {
+    Column(modifier = Modifier.width(3.dp)) {}
+}
+
+@Composable
+fun RowSeparator() {
+    Row(modifier = Modifier.height(7.dp)) {}
 }
 
 @Composable
