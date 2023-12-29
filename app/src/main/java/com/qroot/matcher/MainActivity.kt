@@ -55,33 +55,38 @@ class MainActivity : ComponentActivity() {
                     val dictionary = WordPairsDictionary()
                     val wordPairs = dictionary.getAll()
 
-                    var left = ""
-                    var right = ""
-                    Column {
-                        var cellId = ""
-                        for (entry in wordPairs) {
-                            WordRow(entry, {
-                                left = entry.first
-                                if (!left.isEmpty() && !right.isEmpty()) {
-                                    val result = dictionary.contains(left, right)
-                                    left = ""
-                                    right = ""
-                                    result
-                                } else {
-                                    true
-                                }
-                            }, {
-                                right = entry.second
-                                if (!left.isEmpty() && !right.isEmpty()) {
-                                    val result = dictionary.contains(left, right)
-                                    left = ""
-                                    right = ""
-                                    result
-                                } else {
-                                    true
-                                }
-                            })
-                            Row(modifier = Modifier.height(1.dp)) {}
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            var left = ""
+                            var right = ""
+
+                            for (entry in wordPairs) {
+                                WordRow(entry, {
+                                    left = entry.first
+                                    if (!left.isEmpty() && !right.isEmpty()) {
+                                        val result = dictionary.contains(left, right)
+                                        left = ""
+                                        right = ""
+                                        result
+                                    } else {
+                                        true
+                                    }
+                                }, {
+                                    right = entry.second
+                                    if (!left.isEmpty() && !right.isEmpty()) {
+                                        val result = dictionary.contains(left, right)
+                                        left = ""
+                                        right = ""
+                                        result
+                                    } else {
+                                        true
+                                    }
+                                })
+                                Row(modifier = Modifier.height(3.dp)) {}
+                            }
                         }
                     }
                 }
@@ -95,7 +100,7 @@ fun WordRow(entry: Pair<String, String>, leftOnClick: () -> Boolean, rightOnClic
     Row(
         modifier = Modifier
             .wrapContentHeight()
-            .height(50.dp)
+            .height(60.dp)
     ) {
         WordCell(
             entry.first,
