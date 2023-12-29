@@ -55,59 +55,67 @@ class MainActivity : ComponentActivity() {
                     val dictionary = WordPairsDictionary()
                     val wordPairs = dictionary.getAll()
 
+                    var left = ""
+                    var right = ""
                     Column {
-                        var left = ""
-                        var right = ""
+                        var cellId = ""
                         for (entry in wordPairs) {
-                            Row(
-                                modifier = Modifier
-                                    .wrapContentHeight()
-                                    .height(50.dp)
-                            ) {
-                                WordCell(
-                                    entry.first,
-                                    Modifier
-                                        .weight(1F)
-                                        .fillMaxWidth(0.5f)
-                                        .fillMaxHeight()
-                                ) {
-                                    left = entry.first
-                                    if (!left.isEmpty() && !right.isEmpty()) {
-                                        val result = dictionary.contains(left, right)
-                                        left = ""
-                                        right = ""
-                                        result
-                                    } else {
-                                        true
-                                    }
+                            WordRow(entry, {
+                                left = entry.first
+                                if (!left.isEmpty() && !right.isEmpty()) {
+                                    val result = dictionary.contains(left, right)
+                                    left = ""
+                                    right = ""
+                                    result
+                                } else {
+                                    true
                                 }
-                                // separator
-                                Column(modifier = Modifier.width(1.dp)) {}
-                                WordCell(
-                                    entry.second,
-                                    Modifier
-                                        .weight(1F)
-                                        .background(Color.Blue)
-                                        .fillMaxWidth(1f)
-                                        .fillMaxHeight()
-                                ) {
-                                    right = entry.second
-                                    if (!left.isEmpty() && !right.isEmpty()) {
-                                        val result = dictionary.contains(left, right)
-                                        left = ""
-                                        right = ""
-                                        result
-                                    } else {
-                                        true
-                                    }
+                            }, {
+                                right = entry.second
+                                if (!left.isEmpty() && !right.isEmpty()) {
+                                    val result = dictionary.contains(left, right)
+                                    left = ""
+                                    right = ""
+                                    result
+                                } else {
+                                    true
                                 }
-                            }
+                            })
                             Row(modifier = Modifier.height(1.dp)) {}
                         }
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun WordRow(entry: Pair<String, String>, leftOnClick: () -> Boolean, rightOnClick: () -> Boolean) {
+    Row(
+        modifier = Modifier
+            .wrapContentHeight()
+            .height(50.dp)
+    ) {
+        WordCell(
+            entry.first,
+            Modifier
+                .weight(1F)
+                .fillMaxWidth(0.5f)
+                .fillMaxHeight(),
+            leftOnClick
+        )
+        // separator
+        Column(modifier = Modifier.width(1.dp)) {}
+        WordCell(
+            entry.second,
+            Modifier
+                .weight(1F)
+                .background(Color.Blue)
+                .fillMaxWidth(1f)
+                .fillMaxHeight(),
+            rightOnClick
+        )
     }
 }
 
